@@ -4,6 +4,7 @@
 //3. write degrees output to servo motor
 
 //Note: you can path memorizing function to the potentiometer version by using a pushbutton 
+//path memorizing will be different from that in the bluetooth module because you have to record the final moves only, not the steps taken to do it
 
 //define signal pins in servo motors
 #define servo1_pin 5
