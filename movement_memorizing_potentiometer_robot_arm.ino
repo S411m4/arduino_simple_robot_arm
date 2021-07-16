@@ -14,12 +14,14 @@
 #define pot3 A2
 
 #include <Servo.h> //include servo library
-#define array_size 500
+#define array_size 100
 
 int val1 = 0, val2 = 0, val3 = 0, degree1 = 0, degree2 =0, degree3 = 0; //variables to store potentiometers values
 int record = 0;
 char command; //store command
-int moves[array_size] = {}; //array to store movements
+int servo1moves[array_size] = {}; //array to store movements
+int servo2moves[array_size] = {};
+int servo3moves[array_size] = {};
 int move = 0; //to store current move
 
 //intialize servo motors
@@ -63,18 +65,17 @@ void loop()
     if (record == 1)
     {
       
-	moves[move] = degree1;
-      if(move < 500)
+	servo1moves[move] = degree1;
+      if(move < array_size)
       {move++;}
     
-      moves[move] = degree2;
-      if(move < 500)
+    servo2moves[move] = degree2;
+      if(move < array_size)
       {move++;}
       
-    	moves[move] = degree3;
-            if(move < 500)
-
-            {move++;}
+    servo3moves[move] = degree3;
+      if(move < array_size)
+      {move++;}
     }
   
   
@@ -85,6 +86,7 @@ void loop()
   }
      else if(command == 'T') //stop recording
    {
+    Serial.println(command);
 	record = 0;
    }
   
@@ -92,10 +94,9 @@ void loop()
   {
     Serial.println(command);
 	move = 0;
-    for(int i = 0; i <= 500; i++)
-    {
-		moves[i] = 0;
-    }
+    memset(servo1moves, 0, sizeof(servo1moves));
+    memset(servo2moves, 0, sizeof(servo2moves));
+    memset(servo3moves, 0, sizeof(servo3moves));
   }
   
   
@@ -103,17 +104,13 @@ void loop()
   {
     Serial.println(command);
 	
-	for(int j = 0; j<= array_size; j+= 3)
+    
+	for(int j = 0; j<= move; j++)
     {
-      	if(j <= array_size)
-           {servo1.write(moves[j]);}
-        if((j+1) <= array_size)
-           {servo2.write(moves[j+1]);}
-        if((j+2) <= array_size)
-           {servo3.write(moves[j+2]);}
-      
-      delay(15);
-          
+     
+      	servo1.write(servo1moves[j]);
+        servo2.write(servo2moves[j]);
+        servo3.write(servo3moves[j]);
     }
 
   }
