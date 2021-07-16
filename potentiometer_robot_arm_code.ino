@@ -1,3 +1,9 @@
+//how it works
+//1. take input from potentiometers
+//2. convert potentiometer input to degrees by map function
+//3. write degrees output to servo motor
+
+
 //define signal pins in servo motors
 #define servo1_pin 5
 #define servo2_pin 6
