@@ -3,6 +3,7 @@
 //2. convert potentiometer input to degrees by map function
 //3. write degrees output to servo motor
 
+//Note: you can path memorizing function to the potentiometer version by using a pushbutton 
 
 //define signal pins in servo motors
 #define servo1_pin 5
